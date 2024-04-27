@@ -9,14 +9,14 @@ package logica;
  * @author lauta
  */
 public class Board {
-    private Ficha[][] casillas; // Un tablero 8x8 para las fichas
+    private static Ficha[][] casillas; // Un tablero 8x8 para las fichas
 
     public Board() {
         casillas = new Ficha[8][8];
         inicializarTablero();
     }
 
-    private void inicializarTablero() {
+    private static void inicializarTablero() {
         // Inicializa las fichas en sus posiciones estándar de inicio
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -30,8 +30,24 @@ public class Board {
             }
         }
     }
+    public static int[] movimientosPosibles(int fila,int columna, String tipo){
+        if(tipo.equals("piece red-piece")){
+            
+        }
+        if(tipo.equals("piece white-piece")){
+            
+        }
+        if(tipo.equals("queen white-piece")){
+            
+        }
+        if(tipo.equals("queen red-piece")){
+            
+        }
+        
+        return null;
+    }
 
-    public boolean movePiece(int originRow, int originCol, int targetRow, int targetCol) {
+    public static boolean movePiece(int originRow, int originCol, int targetRow, int targetCol) {
         // Valida el movimiento antes de ejecutarlo
         if (isValidMove(originRow, originCol, targetRow, targetCol)) {
             Ficha ficha = casillas[originRow][originCol];
@@ -42,7 +58,7 @@ public class Board {
         return false;
     }
 
-    private boolean isValidMove(int originRow, int originCol, int targetRow, int targetCol) {
+    private static boolean  isValidMove(int originRow, int originCol, int targetRow, int targetCol) {
         // Implementa las reglas de los movimientos (incluyendo saltar sobre fichas enemigas)
         // Considera las fichas normales y los reyes con movimientos en ambas direcciones
 

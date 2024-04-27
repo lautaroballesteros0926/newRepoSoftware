@@ -17,7 +17,7 @@ function createBoard() {
                 const piece = document.createElement('div');
                 piece.className = 'piece ' + (row < 3 ? 'white-piece' : 'red-piece');
                 piece.addEventListener('click', function() {
-                    selectPiece(row, col);
+                    selectPiece(row, col,piece.className);
                 });
                 cell.appendChild(piece);
             }
@@ -28,12 +28,14 @@ function createBoard() {
     }
 }
 
-function selectPiece(row, col) {
+function selectPiece(row, col,clase) {
     console.log("Row: ", row);
     console.log("Col: ", col);
+    console.log("Clase: ", clase);
     const requestData = {
         row: row,
-        col: col
+        col: col,
+        className: clase
     };
 
     fetch('http://localhost:8080/Proyecto_Juego_de_Damas/SelectPieceServlet', {
@@ -47,16 +49,12 @@ function selectPiece(row, col) {
     .then(data => {
         console.log(data);
         showPossibleMoves(data);
-    })
-    .then(data => {
-        console.log('Datos recibidos del servlet:', data); // Aquí se agrega el console.log
-        showPossibleMoves(data);
-    })
+    })    
     .catch(error => console.error('Error:', error));
     
 }
 createBoard();
-/*
+
 function showPossibleMoves(moves) {
     // Limpiar movimientos anteriores
     document.querySelectorAll('.possible-move').forEach(el => el.classList.remove('possible-move'));
@@ -73,7 +71,7 @@ function showPossibleMoves(moves) {
         cell.addEventListener('click', () => movePiece(moves.origin.row, moves.origin.col, move.row, move.col), { once: true });
     });
 }
-
+/*
 function movePiece(row, col) {
     fetch(`/MovePieceServlet?originRow=${originRow}&originCol=${originCol}&targetRow=${targetRow}&targetCol=${targetCol}`, { method: 'GET' })
     .then(response => response.json())
